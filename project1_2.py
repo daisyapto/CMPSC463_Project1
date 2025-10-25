@@ -6,6 +6,25 @@ of segments within each cluster, using Euclidean distance.
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
+
+def plotClosestPairs(closestPairs):
+   x = []
+   y = []
+   segments = []
+
+   for i in range(len(closestPairs)):
+      x.append(i + 1)
+      y.append(closestPairs[i][0])
+      segments.append((closestPairs[i][1], closestPairs[i][2]))
+
+   fig, ax = plt.subplots()
+   ax.set_xticks(np.arange(min(x) - 1, max(x) + 1, 1))
+   ax.set_yticks(np.arange(min(y), max(y), 2))
+   plt.plot(x, y, marker='o')
+   plt.xlabel('Cluster')
+   plt.ylabel('Distance of Closest Pair')
+   plt.show()
 
 def closestPair(clusters, data):
    minDistances = [] # (Distance, Segement number, Other segment number); index is cluster number (that is not empty)
