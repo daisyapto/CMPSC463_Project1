@@ -9,21 +9,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def plotClosestPairs(closestPairs):
-   x = []
-   y = []
-   segments = []
+   x = [] # Cluster number
+   y = [] # Euc distance between the closest pair of segments in cluster
 
    for i in range(len(closestPairs)):
       x.append(i + 1)
       y.append(closestPairs[i][0])
-      segments.append((closestPairs[i][1], closestPairs[i][2]))
 
    fig, ax = plt.subplots()
-   ax.set_xticks(np.arange(min(x) - 1, max(x) + 1, 1))
-   ax.set_yticks(np.arange(min(y), max(y), 2))
+   ax.set_xticks(np.arange(min(x) - 1, max(x) + 1, 1)) # Arrange x ticks by jumps of 1
+   ax.set_yticks(np.arange(min(y), max(y), 2)) # Arrange y ticks by jumps of 2
    plt.plot(x, y, marker='o')
    plt.xlabel('Cluster')
-   plt.ylabel('Distance of Closest Pair')
+   plt.ylabel('Euclidean Distance between Closest Pair Segments in Cluster')
    plt.show()
 
 def closestPair(clusters, data):
