@@ -9,17 +9,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def plotKadane(kadane):
-    x = []
-    y = []
+    x = [] # Segment number within cluster
+    y = [] # Max sum of segment
     for i in range(len(kadane)):
         x.append(i + 1)
         y.append(kadane[i])
     fig, ax = plt.subplots()
-    ax.set_xticks(np.arange(min(x)-1, max(x)+1, 100))
-    ax.set_yticks(np.arange(min(y), max(y), 100))
+    ax.set_xticks(np.arange(min(x)-1, max(x)+1, 100)) # Arrange x ticks by jumps of 100
+    ax.set_yticks(np.arange(min(y), max(y), 100)) # Arrange y ticks by jumps of 100
     plt.plot(x, y, marker='o')
-    plt.xlabel('Segment')
-    plt.ylabel('Max Sum per Segment')
+    plt.xlabel('Time-series Segment')
+    plt.ylabel('Maximum Sum per Time-series Segment')
     plt.show()
 
 # Reference: GeeksforGeeks "Maximum Subarray Sum - Kadane's Algorithm" Article by kartik
