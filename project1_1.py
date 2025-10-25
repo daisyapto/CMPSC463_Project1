@@ -240,11 +240,11 @@ def plotClusters(clusters):
         y.append(len(clusters[i]))
 
     fig, ax = plt.subplots()
-    ax.set_xticks(np.arange(min(x)-1, max(x)+1, 5))
-    ax.set_yticks(np.arange(min(y), max(y), 50))
+    ax.set_xticks(np.arange(min(x)-1, max(x)+1, 5)) # Arrange x ticks by jumps of 5
+    ax.set_yticks(np.arange(min(y), max(y), 50)) # Arrange y ticks by jumps of 50 (large amount of segments per cluster)
     plt.plot(x, y, marker='o')
     plt.xlabel('Cluster')
-    plt.ylabel('Number of segments per cluster')
+    plt.ylabel('Number of time-series segments per cluster')
     plt.show()
 
 def main():
