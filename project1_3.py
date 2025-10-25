@@ -6,9 +6,23 @@ gets the maximum sum of each "array" (each time-series segment).
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
+
+def plotKadane(kadane):
+    x = []
+    y = []
+    for i in range(len(kadane)):
+        x.append(i + 1)
+        y.append(kadane[i])
+    fig, ax = plt.subplots()
+    ax.set_xticks(np.arange(min(x)-1, max(x)+1, 100))
+    ax.set_yticks(np.arange(min(y), max(y), 100))
+    plt.plot(x, y, marker='o')
+    plt.xlabel('Segment')
+    plt.ylabel('Max Sum per Segment')
+    plt.show()
 
 # Reference: GeeksforGeeks "Maximum Subarray Sum - Kadane's Algorithm" Article by kartik
-
 def kadane(pulses_ABP):
     maxSubArraySums = np.array([]) # empty array for all max sums of each segment
     for timeSeries in pulses_ABP: # for each segment in pulses
