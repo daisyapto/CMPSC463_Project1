@@ -240,13 +240,12 @@ def plotClusters(clusters):
         y.append(len(clusters[i]))
 
     fig, ax = plt.subplots()
-    ax.set_xticks(x)
-    ax.set_yticks(y)
+    ax.set_xticks(np.arange(min(x)-1, max(x)+1, 5))
+    ax.set_yticks(np.arange(min(y), max(y), 50))
     plt.plot(x, y, marker='o')
     plt.xlabel('Cluster')
     plt.ylabel('Number of segments per cluster')
     plt.show()
-
 
 def main():
     # Read data
@@ -257,19 +256,22 @@ def main():
     # Reference (for np euc distance calculation): StackOverflow & Google
     euc_distances_matrix = np.sqrt(np.sum((abp_segments[:, np.newaxis, :] - abp_segments[np.newaxis, :, :]) ** 2, axis=-1))
     print(f"\nEuclidean distances: {euc_distances_matrix}")
-    k = 50 # K-means value, number of clusters initialized, some empty; when k = 20, only 2 or 3 clusters have data
+    k = 100 # K-means value, number of clusters initialized, some empty; when k = 20, only 2 or 3 clusters have data
     clusters = clusterData(abp_segments, euc_distances_matrix, k)
     plotClusters(clusters)
 
-    # Find the closest pair per cluster
+    # Find the closest pair per cluster and plot
     closestPairPerClusters = closestPair.closestPair(clusters, data)
     print("\nClosest pair per (non-empty) cluster:")
     for i in range(len(closestPairPerClusters)):
         print(f"Cluster {i+1}: Distance {closestPairPerClusters[i][0]} between Segment {closestPairPerClusters[i][1]} and Segment {closestPairPerClusters[i][2]}")
+    closestPair.plotClosestPairs(closestPairPerClusters)
 
-    # Find max sum per segment
+    # Find max sum per segment and plot
     print("\nMax sum per segment:")
-    print(kadane.kadane(data[0][0]))
+    kad = kadane.kadane(data[0][0])
+    print(kad)
+    kadane.plotKadane(kad)
 
 if __name__ == "__main__":
     main()
